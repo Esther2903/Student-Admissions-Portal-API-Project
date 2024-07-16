@@ -5,12 +5,13 @@ class AdmissionController {
     async createAdmission(req, res){
         try{
             const admissionData = {
-                motivation_letter: req.file ? req.file.path: '',
+                motivation_letter: req.files['motivation_letter'] ? req.files['motivation_letter'][0].path: '',
                 graduation_year: req.body.graduation_year,
                 average_score: req.body.average_score,
-                card_url: req.file ? req.file.path: '',
-                student_id: req.body.users_id,
+                card_url: req.files['card_url'] ? req.files['card_url'][0].path: '',
+                student_id: req.body.student_id,
                 university_id: req.body.university_id,
+                degree_id: req.body.degree_id,
             }
             const admission = await AdmissionService.createAdmission(admissionData);
             res.status(201).send(admission)

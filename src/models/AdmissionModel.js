@@ -24,14 +24,6 @@ const Admission = sequelize.define('Admission', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    submitted_at: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DATE.now
-    },
-    reviewed_at: {
-        type: DataTypes.DATE,
-    },
     student_id: {
         type: DataTypes.INTEGER,
         allowNull: false,

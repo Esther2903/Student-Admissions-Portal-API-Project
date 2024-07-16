@@ -11,7 +11,7 @@ class CourseController {
                 level: req.body.level,
                 semester: req.body.semester, 
                 university_id: req.body.university_id, 
-                degree_id: req.body.university_id
+                degree_id: req.body.degree_id,
             }
             const course = await CourseService.createCourse(courseData);
             res.status(201).send(course)

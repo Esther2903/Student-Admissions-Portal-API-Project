@@ -2,8 +2,8 @@ const {Admission} = require('../models/Index');
 
 class AdmissionService {
 
-    async createAdmission({motivation_letter, graduation_year, average_score, card_url, student_id, university_id}){
-        const admission = await Admission.create({motivation_letter, graduation_year, average_score, card_url, student_id, university_id})
+    async createAdmission({motivation_letter, graduation_year, average_score, card_url, student_id, university_id, degree_id}){
+        const admission = await Admission.create({motivation_letter, graduation_year, average_score, card_url, student_id, university_id, degree_id})
         return  admission;                    
     }
 
@@ -28,7 +28,7 @@ class AdmissionService {
     }
 
     async getAllAdmission(){
-        return await University.findAll()
+        return await Admission.findAll()
     }
     
 }
