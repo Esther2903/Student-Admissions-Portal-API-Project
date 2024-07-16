@@ -11,7 +11,7 @@ const Degree = sequelize.define('Degree', {
         allowNull: false,
     },
     nb_year: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
 }); 

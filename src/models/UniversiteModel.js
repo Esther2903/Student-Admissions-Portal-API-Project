@@ -32,7 +32,7 @@ const University = sequelize.define('University', {
         allowNull: false,
     },
     established_year: {
-        type: DataTypes.DATE,
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     users_id: {

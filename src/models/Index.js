@@ -50,7 +50,7 @@ Degree.belongsToMany(Program, {through: Program_degree, foreignKey: 'degree_id'}
 Course.belongsToMany(Program, {through:  Course_Program, foreignKey: 'courses_id'});
 Program.belongsToMany(Course, {through:  Course_Program, foreignKey: 'program_id'});
 
-sequelize.sync({ alter: true }).then(() => {
+sequelize.sync({ force: true }).then(() => {
     console.log('Database & tables created!');
 });
 module.exports = {

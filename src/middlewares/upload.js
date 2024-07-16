@@ -9,8 +9,8 @@ const statusStorage = multer.diskStorage({
         if(req.baseUrl.includes('/students')){
             folder = './public/studentsFiles/';
         } 
-        else if(req.baseUrl.includes('/users')){
-            folder = './public/profilePictures/';
+        else if(req.baseUrl.includes('/university')){
+            folder = './public/universityFile/';
         }
        cb(null, folder);
     },
