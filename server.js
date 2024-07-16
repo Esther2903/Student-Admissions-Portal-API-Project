@@ -5,6 +5,7 @@ const studentRoute = require('./src/routers/StudentRouter')
 const universityRoute = require('./src/routers/UniversityRouter')
 const degreeRoute = require('./src/routers/DegreeRouter')
 const courseRoute = require('./src/routers/CourseRouter')
+const admissionRoute = require('./src/routers/AdmissionRouter')
 
 require('dotenv').config()
 
@@ -20,6 +21,7 @@ app.use('/api/students', studentRoute);
 app.use('/api/university', universityRoute);
 app.use('/api/degree', degreeRoute);
 app.use('/api/courses', courseRoute);
+app.use('/api/admissions', admissionRoute);
 
 app.get("/", (req, res) => {
         res.send("Welcome to my web server, this is my Student Admissions Portal API");

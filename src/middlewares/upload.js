@@ -11,6 +11,8 @@ const statusStorage = multer.diskStorage({
         } 
         else if(req.baseUrl.includes('/university')){
             folder = './public/universityFile/';
+        }else if(req.baseUrl.includes('/admissions')){
+            folder = './public/admissionsFile/';
         }
        cb(null, folder);
     },
@@ -22,7 +24,7 @@ const statusStorage = multer.diskStorage({
 const upload = multer({ 
     storage: statusStorage,
     checkFileType: function(req, file, cb){
-        const filetypes = /jpeg|jpg|png|gif|mp4|mov|avi/;
+        const filetypes = /jpeg|jpg|png|gif|mp4|mov|avi|pdf/;
         // Check ext
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
         // Check mime

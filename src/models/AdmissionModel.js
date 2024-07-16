@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, DATE } = require('sequelize');
 const sequelize = require('../config/db_config.js');
 
 const Admission = sequelize.define('Admission', {
@@ -12,8 +12,9 @@ const Admission = sequelize.define('Admission', {
         allowNull: false,
     },
     status: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM('pending', 'accepted', 'rejected'),
         allowNull: false,
+        defaultValue: 'pending',
     },
     average_score: {
         type: DataTypes.INTEGER,
@@ -26,10 +27,10 @@ const Admission = sequelize.define('Admission', {
     submitted_at: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: DATE.now
     },
     reviewed_at: {
         type: DataTypes.DATE,
-        allowNull: false,
     },
     student_id: {
         type: DataTypes.INTEGER,
