@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const userRoute = require('./src/routers/UserRouter');
 const studentRoute = require('./src/routers/StudentRouter')
+const universityRoute = require('./src/routers/UniversityRouter')
 
 require('dotenv').config()
 
@@ -14,6 +15,7 @@ app.use(cors())
 
 app.use('/api/users', userRoute);
 app.use('/api/students', studentRoute);
+app.use('/api/university', universityRoute);
 
 app.get("/", (req, res) => {
         res.send("Welcome to my web server, this is my Student Admissions Portal API");

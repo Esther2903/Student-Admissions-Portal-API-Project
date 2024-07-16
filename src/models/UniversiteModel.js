@@ -35,10 +35,6 @@ const University = sequelize.define('University', {
         type: DataTypes.DATE,
         allowNull: false,
     },
-    location: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     users_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
