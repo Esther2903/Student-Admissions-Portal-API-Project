@@ -71,34 +71,6 @@ class UserController {
             res.status(400).send({ err : err.message })
         }
     }
-
-    async followUser(req, res) {
-        try {
-            const user = await userService.followUser(req.params.userId, req.body.followUserId)
-            res.status(200).json(user);
-        } catch (error) {
-            res.status(400).send({ error : error.message })
-        }        
-    }
-
-    async unfollowUser(req, res) {
-        try {
-            const user = await userService.unfollowUser(req.params.userId, req.body.followUserId)
-            res.status(200).json(user);
-        } catch (error) {
-            res.status(400).send({ error : error.message })
-        }        
-    }
-
-    async getUserFeed(req, res) {
-        try {
-            const feed = await userService.getUserFeed(req.params.userId)
-            res.status(200).json(feed);
-        } catch (error) {
-            res.status(400).send({ error : error.message })
-        }        
-    }
-
 }
 
 module.exports = new UserController()
