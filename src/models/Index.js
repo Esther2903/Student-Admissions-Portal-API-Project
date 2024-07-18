@@ -10,13 +10,16 @@ const Program = require('./ProgramModel');
 const Program_degree = require('./Program_degreeModel');
 const Course_Program = require('./Courses_programModel');
 
-User.hasOne(Student);
+User.hasOne(Student, {
+  foreignKey: 'users_id', });
 Student.belongsTo(User, { 
     foreignKey: {
         name: 'users_id', 
     }
 });
-User.hasOne(University);
+
+User.hasOne(University, {
+  foreignKey: 'users_id'});
 University.belongsTo(User, {
   foreignKey: {
     name: 'users_id',

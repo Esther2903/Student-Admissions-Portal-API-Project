@@ -5,7 +5,7 @@ const auth = (req, res, next) => {
     const token = authHeader && authHeader.split(' ')[1];
   
     if (!token) {
-      return res.sendStatus(401).json({message: 'No token, authorization denied'});
+      return res.status(401).json({message: 'No token, authorization denied'});
     }
 
     try {
@@ -13,12 +13,17 @@ const auth = (req, res, next) => {
         req.user = decoded;
         next();
     } catch (error) {
-        res.sendStatus(401).json({message: 'Token is not valid'});
+        res.status(401).json({message: 'Token is not valid'});
     }
 };
 
-function admin(req, res, next) {
-  if (req.user.role !== 'admin') return res.status(403).json({ message: 'Access denied' });
+
+
+const adminAuth = (req, res, next) => {
+  if (req.user.role !== 'admin') {
+      return res.status(403).json({ message: 'Access denied: Admins only' });
+  }
   next();
-}
-module.exports = {auth};
+};
+
+module.exports = {auth, adminAuth};

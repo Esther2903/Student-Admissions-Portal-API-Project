@@ -1,9 +1,14 @@
 const userService = require ('../services/UserService')
+const { validateUser } = require('../validations/UserValidation');
 
 class UserController {
 
     async registerUser(req, res, next){
         try{
+            const {error} = validateUser(req.body);
+            if (error) {
+                return res.status(400).send({ error: error.details[0].message });
+            }
             const userData = {
                 email: req.body.email,
                 password: req.body.password,
@@ -16,6 +21,10 @@ class UserController {
     }
     async loginUser(req, res, next){
         try{
+            const {error} = validateUser(req.body);
+            if (error) {
+                return res.status(400).send({ error: error.details[0].message });
+            }
             const userData = {
                 email: req.body.email,
                 password: req.body.password,
@@ -27,48 +36,48 @@ class UserController {
         }
     }
 
-    async getUserById(req, res){
+    async getUserById(req, res, next){
         try{
             const user = await userService.getUserById(req.params.id)
             if(!user){
                 return res.status(404).send({err : 'User not found!'})
             }
             res.status(200).send(user)
-        }catch(err){
-            res.status(400).send({ err : err.message })
+        }catch(error){
+            next(error)
         }
     }
 
-    async updateUser(req, res){
+    async updateUser(req, res, next){
         try{
             const user = await userService.updateUser(req.params.id, req.body)
             if(!user){
                 return res.status(404).send({err : 'User not found!'})
             }
             res.status(200).send(user)
-        }catch(err){
-            res.status(400).send({ err : err.message })
+        }catch(error){
+            next(error)
         }
     }
 
-    async deleteUser(req, res){
+    async deleteUser(req, res, next){
         try{
             const user = await userService.deleteUser(req.params.id)
             if(!user){
                 return res.status(404).send({err : 'User not found!'})
             }
             res.send({message: 'user deleted successfully!'})
-        }catch(err){
-            res.status(400).send({ err : err.message })
+        }catch(error){
+            next(error)
         }
     }
 
-    async getAllUsers(req, res){
+    async getAllUsers(req, res, next){
         try{
             const users = await userService.getAllUser()
             res.send(users)
-        }catch(err){
-            res.status(400).send({ err : err.message })
+        }catch(error){
+            next(error);
         }
     }
 }

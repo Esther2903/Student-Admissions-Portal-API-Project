@@ -10,6 +10,7 @@ const courseStudentRoute = require('./src/routers/CourseStudentRouter');
 const programRoute = require('./src/routers/ProgramRouter');
 const programDegreeRoute = require('./src/routers/ProgramDegreeRouter');
 const courseProgramRoute = require('./src/routers/CourseProgramRouter');
+const errorHandler = require('./src/middlewares/errorHandler');
 
 require('dotenv').config()
 
@@ -31,6 +32,7 @@ app.use('/api/program', programRoute);
 app.use('/api/program-degree', programDegreeRoute);
 app.use('/api/course-program', courseProgramRoute);
 
+app.use(errorHandler)
 app.get("/", (req, res) => {
         res.send("Welcome to my web server, this is my Student Admissions Portal API");
 });

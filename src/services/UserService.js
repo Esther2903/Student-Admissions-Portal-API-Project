@@ -12,15 +12,16 @@ class UserService {
     }
 
     async loginUser({ email, password }){
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ where: {email} });
         if (!user) {
             throw new Error('User not found');
         }
         const passwordMatch = await bcrypt.compare(password, user.password);
+        console.log(passwordMatch);
         if (!passwordMatch) {
             throw new Error('Invalid email or password');
         }
-        const token = jwt.sign({id: user._id, role: user.role}, process.env.ACCES_TOKEN_SECRET, {expiresIn: '1h'});
+        const token = jwt.sign({id: user.id, role: user.role}, process.env.ACCES_TOKEN_SECRET, {expiresIn: '1h'});
         return {token, user};
     }
 

@@ -6,9 +6,10 @@ class ProgramController {
             const programData = {
                 name: req.body.name,
                 description: req.body.description,
-                university_id: req.body.university_id,
             };
-            const program = await ProgramService.createProgram(programData);
+            console.log(req.user.id);
+            const program = await ProgramService.createProgram(programData, req.user.id);
+            console.log(program);
             res.status(201).send(program);
         } catch (err) {
             res.status(400).send({ err: err.message });
@@ -17,7 +18,7 @@ class ProgramController {
 
     async getProgramById(req, res) {
         try {
-            const program = await ProgramService.getProgramById(req.params.id);
+            const program = await ProgramService.getProgramById(req.params.id, req.user.id);
             if (!program) {
                 return res.status(404).json({ error: 'Program not found' });
             }
@@ -29,7 +30,7 @@ class ProgramController {
 
     async updateProgram(req, res) {
         try {
-            const program = await ProgramService.updateProgram(req.params.id, req.body);
+            const program = await ProgramService.updateProgram(req.params.id, req.body, req.user.id);
             if (!program) {
                 return res.status(404).send({ err: 'Program not found!' });
             }
@@ -41,7 +42,7 @@ class ProgramController {
 
     async deleteProgram(req, res) {
         try {
-            const program = await ProgramService.deleteProgram(req.params.id);
+            const program = await ProgramService.deleteProgram(req.params.id, req.user.id);
             if (!program) {
                 return res.status(404).send({ err: 'Program not found!' });
             }
@@ -53,7 +54,7 @@ class ProgramController {
 
     async getAllPrograms(req, res) {
         try {
-            const programs = await ProgramService.getAllPrograms();
+            const programs = await ProgramService.getAllPrograms(req.user.id);
             res.send(programs);
         } catch (err) {
             res.status(400).send({ err: err.message });

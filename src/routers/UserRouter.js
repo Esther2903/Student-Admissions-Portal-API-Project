@@ -5,10 +5,10 @@ const { auth } = require ('../middlewares/Auth')
 
 userRouter.post('/register', userController.registerUser);
 userRouter.post('/login', userController.loginUser);
-userRouter.get('/:id', userController.getUserById);
+userRouter.get('/:id', auth, userController.getUserById);
 userRouter.put('/:id', auth, userController.updateUser);
-userRouter.delete('/:id', userController.deleteUser);
-userRouter.get('/',userController.getAllUsers);
+userRouter.delete('/:id', auth, userController.deleteUser);
+userRouter.get('/', userController.getAllUsers);
 
 
 module.exports = userRouter;
