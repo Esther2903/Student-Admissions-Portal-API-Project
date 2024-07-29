@@ -3,12 +3,12 @@ const { Program, University, User } = require('../models/Index');
 class ProgramService {
     async createProgram({ name, description, users_id }) {
 
-        const user = await User.findByPk(users_id);
+        const user = await User.findOne(users_id);
         console.log(user);
         if (!user) {
             console.log('User not found');
         }
-        const university = await University.find({ where: { users_id: user.id } });
+        const university = await University.findOne({ where: { users_id: user.id } });
         console.log(university);
         if (!university) {
             console.log('No associated university found for the user');
